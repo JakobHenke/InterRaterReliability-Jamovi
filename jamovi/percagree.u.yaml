@@ -1,0 +1,66 @@
+title: percent Agreement
+name: percAgree
+jus: '3.0'
+stage: 0
+compilerMode: tame
+children:
+  - type: VariableSupplier
+    persistentItems: false
+    stretchFactor: 1
+    children:
+      - type: TargetLayoutBox
+        label: Rater ID
+        children:
+          - type: VariablesListBox
+            name: CID
+            maxItemCount: 1
+            isTarget: true
+      - type: TargetLayoutBox
+        label: Case ID
+        children:
+          - type: VariablesListBox
+            name: CaID
+            maxItemCount: 1
+            isTarget: true
+      - type: TargetLayoutBox
+        label: Values
+        children:
+          - type: VariablesListBox
+            name: vals
+            isTarget: true
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: Label
+        label: Analyses
+      - type: CheckBox
+        name: percAgree
+      - type: CheckBox
+        name: hol
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: Label
+        label: Missing Values
+      - type: CheckBox
+        name: omitNA
+        children:
+          - type: RadioButton
+            name: naMethod_list
+            optionName: naMethod
+            optionPart: listwise
+            enable: (omitNA)
+          - type: RadioButton
+            name: naMethod_pair
+            optionName: naMethod
+            optionPart: pairwise
+            enable: (omitNA)
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: Label
+        label: Additional Information
+      - type: CheckBox
+        name: rat
+      - type: CheckBox
+        name: cas

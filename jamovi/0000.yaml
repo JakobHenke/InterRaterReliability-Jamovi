@@ -1,0 +1,29 @@
+---
+title: Calculate Inter-Rater Reliability for Content Analyses
+name: InterRaterReliability
+version: 0.1.0
+jms: '1.0'
+authors:
+  - Jakob Henke
+maintainer: The package maintainer <jakob.henke@tu-dortmund.de>
+date: '1970-01-01'
+type: R
+description: >-
+  This module allows you to calcuate reliability estimates of coded data.
+  Currently supports simple percent agreement, Holsti's coefficient, and
+  Krippendorff's alpha. 
+analyses:
+  - title: percent Agreement
+    name: percAgree
+    ns: InterRaterReliability
+    menuGroup: InterRater
+    menuTitle: percent Agreement
+  - title: Krippendorff's Alpha
+    name: kripp
+    ns: InterRaterReliability
+    menuGroup: InterRater
+    menuTitle: Krippendorff's Alpha
+usesNative: true
+minApp: 1.0.8
+
+...

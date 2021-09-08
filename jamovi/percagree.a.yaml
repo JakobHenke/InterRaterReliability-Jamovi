@@ -1,0 +1,68 @@
+---
+name:  percAgree
+title: percent Agreement
+menuGroup: InterRater
+version: '1.0.0'
+jas: '1.2'
+
+options:
+    - name: data
+      type: Data
+
+    - name: CID
+      title: Rater ID
+      type: Variable
+      suggested: [nominal, id]
+      permitted: [factor, id]
+
+    - name: CaID
+      title: Case ID
+      type: Variable
+      suggested: [nominal, id]
+      permitted: [factor, id]
+
+    - name: vals
+      title: Values
+      type: Variables 
+
+    - name: percAgree
+      title: simple percent agreement
+      type: Bool
+      default: false
+
+    - name: hol
+      title: Holsti's coefficient
+      type: Bool
+      default: false
+
+    - name: omitNA
+      title: omit missing values
+      type: Bool
+      default: false
+
+    - name: naMethod
+      title: Method
+      type: List
+      options:
+        - name: listwise
+          title: listwise
+        - name: pairwise
+          title: pairwise
+      default: listwise
+
+    - name: rat
+      title: Raters
+      type: Bool
+      default: false
+
+    - name: cas
+      title: Cases
+      type: Bool
+      default: false
+
+
+
+
+...
+
+

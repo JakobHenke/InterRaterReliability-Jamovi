@@ -1,0 +1,25 @@
+---
+name:  kripp
+title: Krippendorff's Alpha
+jrs:   '1.1'
+
+items:
+    - name:  krippAlph
+      title: Krippendorff's Alpha
+      type: Table
+      rows: (vals)
+
+      clearWith:  
+        - CID
+        - CaID
+        - vals
+
+      columns:
+      - name: var
+        title: ''
+        type: text
+        content: ($key) 
+
+
+
+...

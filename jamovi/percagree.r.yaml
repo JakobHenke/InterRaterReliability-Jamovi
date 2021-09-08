@@ -1,0 +1,25 @@
+---
+name:  percAgree
+title: percent Agreement
+jrs:   '1.1'
+
+items:
+    - name:  warning
+      title: ""
+      type: Preformatted
+
+    - name:  agree
+      title: Rater Agreement
+      type: Table
+      rows: (vals)
+      columns:
+      - name: var
+        title: ''
+        type: text
+        content: ($key)
+     
+
+
+      
+
+...
