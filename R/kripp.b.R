@@ -69,12 +69,9 @@ krippClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                  indimat[,2] <- data[[rater]] ## col 2 are raters
                  
                  tmpdat[indimat] <- data[[value]] ## assigns values to matrix for reliability estimation.
-                 
-                 #tmpdat <- matrix(as.numeric(unlist(tmpdat0[, names(tmpdat0) == name])), nrow = length(unique(self$data[, self$options$CaID]))) ##build matrix
-                 
+                                  
                  results <- krippendorffsalpha::krippendorffs.alpha(tmpdat, level = meth, confint = FALSE) ## calculate result
                  
-           
                  if(self$options$rat){ ## add info on raters on demand 
                      table$setRow(rowKey=val, values=list(  # set by rowKey!
                          Raters = results$coders))
