@@ -1,0 +1,7 @@
+exportPattern("^[[:alpha:]]+")
+
+export(percAgreeClass)
+export(percAgreeOptions)
+
+export(krippClass)
+export(krippOptions)

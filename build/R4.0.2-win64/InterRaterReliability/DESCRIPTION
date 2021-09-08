@@ -1,0 +1,14 @@
+Package: InterRaterReliability
+Type: Package
+Title: calcuate reliability estimates for content analyses
+Version: 0.0.1
+Author: Jakob Henke
+maintainer: The package maintainer <jakob.henke@tu-dortmund.de>
+Description: This module allows you to calcuate reliability estimates of coded data.
+  Currently supports simple percent agreement, Holsti's coefficient, and
+  Krippendorff's alpha. 
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports: jmvcore (>= 0.8.5), krippendorffsalpha, R6
+Built: R 4.0.2; ; 2021-09-08 08:37:07 UTC; windows
