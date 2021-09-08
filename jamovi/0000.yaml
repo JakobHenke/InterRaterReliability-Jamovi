@@ -1,7 +1,7 @@
 ---
 title: Calculate Inter-Rater Reliability for Content Analyses
 name: InterRaterReliability
-version: 0.1.0
+version: 0.0.1
 jms: '1.0'
 authors:
   - Jakob Henke
