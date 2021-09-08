@@ -1,4 +1,4 @@
-# InterRaterReliability jamovi
+# Inter-Rater Reliability for jamovi
 This module provides percent agreement, Holsti's reliability coefficient (average %-agreement between all rates), and Krippendorff's alpha for jamovi. 
 
 ## Data structure
@@ -67,4 +67,7 @@ Users can display the number of raters and cases on demand. The values represent
 
 
 ## Krippendorff's Alpha
-Krippendorff's Alpha (here implemented via the [krippendorffsalpha package for R by John Hughes](https://cran.r-project.org/web/packages/krippendorffsalpha/index.html) accounts for chance agreement between raters. In content analysis, it is considered best-practice to use a reliability coefficient from this class. It handles missing values automatically, thus requiring no further action by the user. Currently not implemented is the possibility to bootstrap confidence intervals. This option may be added in a later version.
+Krippendorff's Alpha (here implemented via the [krippendorffsalpha package for R by John Hughes](https://cran.r-project.org/web/packages/krippendorffsalpha/index.html) accounts for chance agreement between raters. In content analysis, it is considered best-practice to use a reliability coefficient from this class. It handles missing values automatically, thus requiring no further action by the user. The possibility to bootstrap confidence intervals is currently not implemented, but may be added in a later version.
+
+### Variable Level
+Krippendorff's Alpha uses weights to quantify observed disagreement between raters. These differ depending on the variable level. Users can choose between nominal, ordinal, interval, or ratio scaled data. The option is applied to all supplpied variables. Thus, if users want to calculate Krippendorff's Alpha for 2 differently scaled variables, the calculations should be done separately. 
