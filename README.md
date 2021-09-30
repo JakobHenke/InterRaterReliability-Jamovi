@@ -14,12 +14,12 @@ The module is currently limited to the above-mentioned analyses. Other reliabili
 This option allows users to calculate simple percent agreement and Holsti's coefficient for all variables, regardless of their type. Currently not supported is a tolerance option for interval and ratio scales, which are supported by some R packages (e.g., [the irr package](https://cran.r-project.org/web/packages/irr/index.html). This option may be added in the future. For both analyses, the user has the option to omit missing values and add information on the number of raters and cases to the output.
 
 #### Missing Values
-One challenge for reliability estimates are missing values. These can either be viewed as containing information (e.g., because there was no fitting code to assign to an item) or as true missing values (e.g., because 1 rater forgot to code some items). Krippendorff's alpha handles missing values automatically, but the same is true for percent agreement and the Holsti coefficient.
+One challenge for reliability estimates are missing values. These can either be viewed as containing information (e.g., because there was no fitting code to assign to an item) or as true missing values (e.g., because 1 rater forgot to code some items). Krippendorff's alpha handles missing values automatically, but the same isn't true for percent agreement and the Holsti coefficient.
 
-If missing values are present in a variable, the user is alerted and has three options:
-1. Keep missing values. This is the default and treats missing values as containing information. This is achieved by replacing all NAs with an arbitrary value. Specifically, the sum of all codings, which ensures that the value cannot be present anywhere else.
+Missing values can be excluded in two ways:
+1. Omit missing values analysis by analysis (i.e, pairwise). This option preserves the maximum amount of data, by keeping all rows and only removing the missing values. For Holsti's coefficient, the percent agreement between each pair of coders is then based on the remaining number of comparisons. This option is the default.
 2. Omit missing values listwise. This option removes all cases whit at least one missing value. 
-3. Omit missing values pairwise. This option preserves the maximum amount of data, by keeping all rows and only removing the missing values. For Holsti's coefficient, the percent agreement between each pair of coders is then based on the remaining number of comparisons.
+
 
 ##### Example
 Consider the following data set:
@@ -46,13 +46,10 @@ To calculate reliability estimates, the data is first converted to a matrix with
 
 We see that only one rater coded each item and only one item was coded by all raters. 
 
-If we now decided to treat NAs as containing information, the resulting percent agreement would be 0. No case was coded identical by all raters. 
-Holsti's coefficient would be .33 
-Each rater pair (1 & 2, 1 & 3, 2 & 3) agreed in one third of cases. Adding these agreements and dividing by the number of comparisons (3) gives us this result.
 
-If, instead, we decided to omit NAs listwise, we'd be left with only one case to compare. The resulting percent-agreement would still be zero, while Holsti's coefficient remains the same. Rater 1 and 3 now have perfect agreement (i.e., 1) but the agreement between for the other two pairs is 0, resulting in an average of .33
+If we decided to omit NAs listwise we'd be left with only one case to compare. The resulting percent-agreement would  be zero, while Holsti's coefficient would be .33. Raters 1 and 3  have perfect agreement (i.e., 1 out of 1) but the agreement between for the other two pairs is 0, resulting in an average of .33
 
-Crucially, the estimates under the last option are based on only 1 case out the 3 we recorded. If NAs are caused by a planned process (e.g., because students decided to split the work or because only the PI coded each case and their collaborators split the work evenly) or if some raters simply forgot to rate all cases, we could decide to retain as much information as possible by omitting NAs pairwise.
+Crucially, the estimates under listwise deletion are based on only 1 case out the 3 we recorded. If NAs are caused by a planned process (e.g., because students decided to split the work or because only the PI coded each case and their collaborators split the work evenly) or if some raters simply forgot to rate all cases, we could decide to retain as much information as possible by omitting NAs on an analysis by analysis base i.e., pairwise.
 In this case, the resulting percent-agreement would be 66.67%. There is no agreement on the first case, but perfect agreement on cases 2 and 3, if we ignore the NAs. For Holsti's coefficient, agreement for each pair is calculated based on the cases both raters coded:
 - raters 1 and 2 have two cases they both coded. They agree in one of them, so the resulting agreement is .5
 - raters 1 and 3 have only 1 case in common, but achieve perfect agreement, i.e. 1
