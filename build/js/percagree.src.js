@@ -3,7 +3,7 @@
 
 'use strict';
 
-const options = [{"name":"data","type":"Data"},{"name":"CID","title":"Rater ID","type":"Variable","suggested":["nominal","id"],"permitted":["factor","id"]},{"name":"CaID","title":"Case ID","type":"Variable","suggested":["nominal","id"],"permitted":["factor","id"]},{"name":"vals","title":"Values","type":"Variables"},{"name":"percAgree","title":"simple percent agreement","type":"Bool","default":false},{"name":"hol","title":"Holsti's coefficient","type":"Bool","default":false},{"name":"omitNA","title":"omit missing values","type":"Bool","default":false},{"name":"naMethod","title":"Method","type":"List","options":[{"name":"listwise","title":"listwise"},{"name":"pairwise","title":"pairwise"}],"default":"listwise"},{"name":"rat","title":"Raters","type":"Bool","default":false},{"name":"cas","title":"Cases","type":"Bool","default":false}];
+const options = [{"name":"data","type":"Data"},{"name":"CID","title":"Rater ID","type":"Variable","suggested":["nominal","id"],"permitted":["factor","id"]},{"name":"CaID","title":"Case ID","type":"Variable","suggested":["nominal","id"],"permitted":["factor","id"]},{"name":"vals","title":"Values","type":"Variables"},{"name":"percAgree","title":"Simple percent agreement","type":"Bool","default":false},{"name":"hol","title":"Holsti's coefficient","type":"Bool","default":false},{"name":"naMethod","title":"Method","type":"List","options":[{"name":"pairwise","title":"Exclude cases analysis by analysis"},{"name":"listwise","title":"Exclude cases listwise"}],"default":"pairwise"},{"name":"rat","title":"Raters","type":"Bool","default":false},{"name":"cas","title":"Cases","type":"Bool","default":false}];
 
 const view = function() {
     
@@ -108,25 +108,23 @@ view.layout = ui.extend({
 					label: "Missing Values"
 				},
 				{
-					type: DefaultControls.CheckBox,
-					typeName: 'CheckBox',
-					name: "omitNA",
+					type: DefaultControls.LayoutBox,
+					typeName: 'LayoutBox',
+					margin: "large",
 					controls: [
-						{
-							type: DefaultControls.RadioButton,
-							typeName: 'RadioButton',
-							name: "naMethod_list",
-							optionName: "naMethod",
-							optionPart: "listwise",
-							enable: "(omitNA)"
-						},
 						{
 							type: DefaultControls.RadioButton,
 							typeName: 'RadioButton',
 							name: "naMethod_pair",
 							optionName: "naMethod",
-							optionPart: "pairwise",
-							enable: "(omitNA)"
+							optionPart: "pairwise"
+						},
+						{
+							type: DefaultControls.RadioButton,
+							typeName: 'RadioButton',
+							name: "naMethod_list",
+							optionName: "naMethod",
+							optionPart: "listwise"
 						}
 					]
 				}

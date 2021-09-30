@@ -41,17 +41,6 @@ krippClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             table$setNote("Note", methstr) ## add note
             
             
-            if(self$options$rat){ ## add column for raters on demand
-                table$addColumn(name = "Raters")
-            }
-            
-            if(self$options$cas){ ## add column for cases on demand
-                table$addColumn(name = "Cases")
-            }
-            
-            table$addColumn(name = "Alpha", format = "zto") ## add column for Krippendorf's alpha
-      
-            
              for (val in self$options$vals) { ## calculate for each var in values
                  
                  rater <- self$options$CID ## short names
@@ -69,23 +58,19 @@ krippClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                  indimat[,2] <- data[[rater]] ## col 2 are raters
                  
                  tmpdat[indimat] <- data[[value]] ## assigns values to matrix for reliability estimation.
-                                  
+                 
                  results <- krippendorffsalpha::krippendorffs.alpha(tmpdat, level = meth, confint = FALSE) ## calculate result
                  
-                 if(self$options$rat){ ## add info on raters on demand 
-                     table$setRow(rowKey=val, values=list(  # set by rowKey!
-                         Raters = results$coders))
-                 }
+           
+                table$setRow(rowKey=val, values=list(  
+                  Raters = results$coders))
+                                
+                table$setRow(rowKey=val, values=list(  
+                  Cases = results$units))
+                                 
+                table$setRow(rowKey=val, values=list(  
+                  alpha = results$alpha.hat))
                 
-                 if(self$options$cas){ ## add info on cases by demand
-                     table$setRow(rowKey=val, values=list(  # set by rowKey!
-                         Cases = results$units))
-                 }
-                 
-                 table$setRow(rowKey=val, values=list(  # set by rowKey! ## add alpha
-                      Alpha = results$alpha.hat))
-                
-
             }
             
 

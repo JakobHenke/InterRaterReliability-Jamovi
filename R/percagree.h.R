@@ -11,8 +11,7 @@ percAgreeOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             vals = NULL,
             percAgree = FALSE,
             hol = FALSE,
-            omitNA = FALSE,
-            naMethod = "listwise",
+            naMethod = "pairwise",
             rat = FALSE,
             cas = FALSE, ...) {
 
@@ -51,17 +50,13 @@ percAgreeOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 "hol",
                 hol,
                 default=FALSE)
-            private$..omitNA <- jmvcore::OptionBool$new(
-                "omitNA",
-                omitNA,
-                default=FALSE)
             private$..naMethod <- jmvcore::OptionList$new(
                 "naMethod",
                 naMethod,
                 options=list(
-                    "listwise",
-                    "pairwise"),
-                default="listwise")
+                    "pairwise",
+                    "listwise"),
+                default="pairwise")
             private$..rat <- jmvcore::OptionBool$new(
                 "rat",
                 rat,
@@ -76,7 +71,6 @@ percAgreeOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$.addOption(private$..vals)
             self$.addOption(private$..percAgree)
             self$.addOption(private$..hol)
-            self$.addOption(private$..omitNA)
             self$.addOption(private$..naMethod)
             self$.addOption(private$..rat)
             self$.addOption(private$..cas)
@@ -87,7 +81,6 @@ percAgreeOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         vals = function() private$..vals$value,
         percAgree = function() private$..percAgree$value,
         hol = function() private$..hol$value,
-        omitNA = function() private$..omitNA$value,
         naMethod = function() private$..naMethod$value,
         rat = function() private$..rat$value,
         cas = function() private$..cas$value),
@@ -97,7 +90,6 @@ percAgreeOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         ..vals = NA,
         ..percAgree = NA,
         ..hol = NA,
-        ..omitNA = NA,
         ..naMethod = NA,
         ..rat = NA,
         ..cas = NA)
@@ -130,7 +122,28 @@ percAgreeResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                         `name`="var", 
                         `title`="", 
                         `type`="text", 
-                        `content`="($key)"))))}))
+                        `content`="($key)"),
+                    list(
+                        `name`="Raters", 
+                        `title`="Raters", 
+                        `type`="integer", 
+                        `visible`="(rat)"),
+                    list(
+                        `name`="Cases", 
+                        `title`="Cases", 
+                        `type`="integer", 
+                        `visible`="(cas)"),
+                    list(
+                        `name`="Agr", 
+                        `title`="Agreement", 
+                        `type`="integer", 
+                        `visible`="(percAgree)"),
+                    list(
+                        `name`="Holsti", 
+                        `title`="Holsti", 
+                        `type`="integer", 
+                        `visible`="(hol)", 
+                        `format`="zto"))))}))
 
 percAgreeBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "percAgreeBase",
@@ -152,7 +165,7 @@ percAgreeBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 requiresMissings = FALSE)
         }))
 
-#' percent Agreement
+#' Percent Agreement
 #'
 #' 
 #' @param data .
@@ -161,7 +174,6 @@ percAgreeBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' @param vals .
 #' @param percAgree .
 #' @param hol .
-#' @param omitNA .
 #' @param naMethod .
 #' @param rat .
 #' @param cas .
@@ -185,8 +197,7 @@ percAgree <- function(
     vals,
     percAgree = FALSE,
     hol = FALSE,
-    omitNA = FALSE,
-    naMethod = "listwise",
+    naMethod = "pairwise",
     rat = FALSE,
     cas = FALSE) {
 
@@ -210,7 +221,6 @@ percAgree <- function(
         vals = vals,
         percAgree = percAgree,
         hol = hol,
-        omitNA = omitNA,
         naMethod = naMethod,
         rat = rat,
         cas = cas)

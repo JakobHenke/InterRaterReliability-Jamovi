@@ -26,7 +26,7 @@ options:
       type: Variables
 
     - name: level
-      title: Varibale level
+      title: Measure type
       type: List
       options:
         - title: Nominal

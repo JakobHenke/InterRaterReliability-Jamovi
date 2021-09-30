@@ -107,7 +107,21 @@ krippResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                         `name`="var", 
                         `title`="", 
                         `type`="text", 
-                        `content`="($key)"))))}))
+                        `content`="($key)"),
+                    list(
+                        `name`="Raters", 
+                        `title`="Raters", 
+                        `type`="integer", 
+                        `visible`="(rat)"),
+                    list(
+                        `name`="Cases", 
+                        `title`="Cases", 
+                        `type`="integer", 
+                        `visible`="(cas)"),
+                    list(
+                        `name`="alpha", 
+                        `title`="Alpha", 
+                        `format`="zto"))))}))
 
 krippBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "krippBase",

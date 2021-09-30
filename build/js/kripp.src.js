@@ -3,7 +3,7 @@
 
 'use strict';
 
-const options = [{"name":"data","type":"Data"},{"name":"CID","title":"Rater ID","type":"Variable","suggested":["nominal","id"],"permitted":["factor","id"]},{"name":"CaID","title":"Case ID","type":"Variable","suggested":["nominal","id"],"permitted":["factor","id"]},{"name":"vals","title":"Values","type":"Variables"},{"name":"level","title":"Varibale level","type":"List","options":[{"title":"Nominal","name":"nominal"},{"title":"Ordinal","name":"ordinal"},{"title":"Interval","name":"interval"},{"title":"Ratio","name":"ratio"}],"default":"nominal"},{"name":"rat","title":"Raters","type":"Bool","default":false},{"name":"cas","title":"Cases","type":"Bool","default":false}];
+const options = [{"name":"data","type":"Data"},{"name":"CID","title":"Rater ID","type":"Variable","suggested":["nominal","id"],"permitted":["factor","id"]},{"name":"CaID","title":"Case ID","type":"Variable","suggested":["nominal","id"],"permitted":["factor","id"]},{"name":"vals","title":"Values","type":"Variables"},{"name":"level","title":"Measure type","type":"List","options":[{"title":"Nominal","name":"nominal"},{"title":"Ordinal","name":"ordinal"},{"title":"Interval","name":"interval"},{"title":"Ratio","name":"ratio"}],"default":"nominal"},{"name":"rat","title":"Raters","type":"Bool","default":false},{"name":"cas","title":"Cases","type":"Bool","default":false}];
 
 const view = function() {
     
@@ -95,7 +95,7 @@ view.layout = ui.extend({
 				{
 					type: DefaultControls.Label,
 					typeName: 'Label',
-					label: "additional Information"
+					label: "Additional Information"
 				},
 				{
 					type: DefaultControls.CheckBox,

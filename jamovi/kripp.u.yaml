@@ -37,7 +37,7 @@ children:
     margin: large
     children:
       - type: Label
-        label: additional Information
+        label: Additional Information
       - type: CheckBox
         name: rat
       - type: CheckBox

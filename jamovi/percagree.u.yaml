@@ -42,19 +42,17 @@ children:
     children:
       - type: Label
         label: Missing Values
-      - type: CheckBox
-        name: omitNA
+      - type: LayoutBox
+        margin: large
         children:
-          - type: RadioButton
-            name: naMethod_list
-            optionName: naMethod
-            optionPart: listwise
-            enable: (omitNA)
           - type: RadioButton
             name: naMethod_pair
             optionName: naMethod
             optionPart: pairwise
-            enable: (omitNA)
+          - type: RadioButton
+            name: naMethod_list
+            optionName: naMethod
+            optionPart: listwise
   - type: LayoutBox
     margin: large
     children:

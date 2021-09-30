@@ -9,11 +9,11 @@ percAgreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
          
          .agreement = function(data){  ## function to calculate percent agreement
            
-           if(self$options$omitNA && self$options$naMethod == "listwise"){  ## omit NAs listwise
+           if(self$options$naMethod == "listwise"){  ## omit NAs listwise
              data <- na.omit(data)
            }
            
-           if(self$options$omitNA && self$options$naMethod == "pairwise"){  ## omit NAs pairwise
+           if(self$options$naMethod == "pairwise"){  ## omit NAs pairwise
              res <- apply(data, 1, function(x) length(unique(na.omit(x))) == 1)
            }else{
              res <- apply(data, 1, function(x) length(unique(x)) == 1) ##check if each row contains only the same element, i.e. if all raters agree
@@ -32,22 +32,10 @@ percAgreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
          
          
          
-         .holsti = function(data){ ## Define function for Holsti coefficient
-           
-           if(!self$options$omitNA){ ## calculate Holsti if NAs should be kept. This treats NAs as containing information and allows comparisons.
-             
-             data[is.na(data)] <- sum(data, na.rm = T) ## replace NAs with an arbitrary unique value
-             
-             similarity.matrix <- apply(data, 2, function(x) colSums(x==data)) ## calculate similarity between coders
-             
-             n_comparisons <- apply(data, 2, function(x) colSums(!is.na(x==data))) ## total number of comparisons for each coder pair
-             
-             pairs <- similarity.matrix[upper.tri(similarity.matrix)]/n_comparisons[upper.tri(n_comparisons)] ## agreement between pairs of coders
-             
-            }
+         .holsti = function(data){ ## Define function for Holsti's coefficient
            
            
-           if(self$options$omitNA && self$options$naMethod == "listwise"){  ## remove NAs listwise on demand
+           if(self$options$naMethod == "listwise"){  ## remove NAs listwise 
              data <- na.omit(data)
             }
             
@@ -59,6 +47,8 @@ percAgreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
            n_comparisons <- apply(data, 2, function(x) colSums(!is.na(x==data))) ## total number of comparisons. denomenator for holsti, 
            
            pairs <- similarity.matrix[upper.tri(similarity.matrix)]/n_comparisons[upper.tri(n_comparisons)] ## agreement between pairs of coders
+           
+           pairs <- na.omit(pairs) ## remove possible NaNs
            
            holsti_cr <- sum(pairs)/length(pairs) ## compute Holsti CR
            
@@ -94,25 +84,6 @@ percAgreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
         .compute = function() {
 
             table <- self$results$agree ##set up reuslts table
-
-            if(self$options$rat){
-                table$addColumn(name = "Raters") ##add column for raters on demand
-            }
-            
-            if(self$options$cas){
-                table$addColumn(name = "Cases") ##add column for cases on demand
-            }
-            
-            if(self$options$percAgree){
-                table$addColumn(name = "Agreement") ##add column for simple %-agreement on demand
-            }
-            
-            if(self$options$hol){
-                table$addColumn(name = "Holsti", format = "zto") ##add column for Holsti coefficient on demand
-            }
-
-            
-            message <- vector(mode = "character") ## set up container for warnings
             
             for (val in self$options$vals) { ##repeat calculation for each variable in values
                 
@@ -136,24 +107,12 @@ percAgreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                                                  ## doing this via the index matrix ensures we can work with messy data! 
                                                  ##e.g. if 1 coder forgot to code 1 item, it'll end up as an NA here
                 
-
-                
-                if(any(is.na(tmpdat))){
-                  
-                  message <- paste0(message, "Codings for ", val, " contain ", length(which(is.na(tmpdat))), " missing value(s).",
-                                              "\n", "Consider omitting NAs or checking ID variables for incongruencies. \n")
-                  
-                  self$results$warning$setContent(message)
-                }
-                
                 
                 results <- private$.agreement(tmpdat)  ##run agreement function on matrix; must be outside if to get rater/ case numbers
                 
-                if(self$options$percAgree){
                   
                   table$setRow(rowKey=val, values=list(  ## fill percent agreement column
-                    Agreement = paste0(round(results$Agreement, 2), "%")))
-                }
+                    Agr = paste0(round(results$Agreement, 2), "%")))
                 
                 
                 if(self$options$hol){
@@ -162,19 +121,14 @@ percAgreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                   
                   table$setRow(rowKey=val, values=list(  ## fill holsti column
                     Holsti = holsti))
-     
                 }
                 
                 
-                if(self$options$rat){
                   table$setRow(rowKey=val, values=list(  ## fill raters column
                     Raters = results$Raters)) 
-                }
                 
-                if(self$options$cas){
                   table$setRow(rowKey=val, values=list(  ## fill cases column
                     Cases = results$Cases))
-                }
                 
                 
   

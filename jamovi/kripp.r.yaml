@@ -18,7 +18,18 @@ items:
       - name: var
         title: ''
         type: text
-        content: ($key) 
+        content: ($key)
+      - name: Raters
+        title: Raters
+        type: integer
+        visible: (rat)
+      - name: Cases
+        title: Cases
+        type: integer
+        visible: (cas)
+      - name: alpha
+        title: Alpha
+        format: zto
 
 
 

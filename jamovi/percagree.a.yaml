@@ -1,6 +1,6 @@
 ---
 name:  percAgree
-title: percent Agreement
+title: Percent Agreement
 menuGroup: InterRater
 version: '1.0.0'
 jas: '1.2'
@@ -26,7 +26,7 @@ options:
       type: Variables 
 
     - name: percAgree
-      title: simple percent agreement
+      title: Simple percent agreement
       type: Bool
       default: false
 
@@ -35,20 +35,16 @@ options:
       type: Bool
       default: false
 
-    - name: omitNA
-      title: omit missing values
-      type: Bool
-      default: false
 
     - name: naMethod
       title: Method
       type: List
       options:
-        - name: listwise
-          title: listwise
         - name: pairwise
-          title: pairwise
-      default: listwise
+          title: Exclude cases analysis by analysis
+        - name: listwise
+          title: Exclude cases listwise
+      default: pairwise
 
     - name: rat
       title: Raters

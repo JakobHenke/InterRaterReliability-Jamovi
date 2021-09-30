@@ -13,16 +13,23 @@ description: >-
   Currently supports simple percent agreement, Holsti's coefficient, and
   Krippendorff's alpha. 
 analyses:
-  - title: percent Agreement
+  - title: Percent Agreement
     name: percAgree
     ns: InterRaterReliability
     menuGroup: InterRater
-    menuTitle: percent Agreement
+    menuTitle: Percent Agreement
   - title: Krippendorff's Alpha
     name: kripp
     ns: InterRaterReliability
     menuGroup: InterRater
     menuTitle: Krippendorff's Alpha
+datasets:
+  - name: reliablity
+    path: example_reliability_data.csv
+    description: Simulated exemplary data for reliability analysis
+    tags:
+      - Percent Agreement
+      - Krippendorff's Alpha
 usesNative: true
 minApp: 1.0.8
 
